@@ -1,0 +1,10 @@
+.mainLoggedIn {
+  margin-top: 56px;
+}
+
+#background-content {
+  background: #090979;
+  background: linear-gradient(307deg, #090979 0%, #00d4ff 100%);
+}
+
+/*# sourceMappingURL=app.component.css.map */

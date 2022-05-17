@@ -1,39 +1,28 @@
-import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router
-} from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import {Injectable} from '@angular/core';
+import {CanActivate, Router} from '@angular/router';
+import {Auth, onAuthStateChanged} from '@angular/fire/auth';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
+
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const user = await this.authService.getUser();
-        if (user) {
-          resolve(true);
-        } else {
-          reject('No user logged in');
-          this.router.navigateByUrl('/login');
-        }
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
+    constructor(
+        private auth: Auth,
+        private router: Router
+    ) {}
+
+    canActivate(): Promise<boolean> {
+        return new Promise(async (resolve, reject) => {
+            onAuthStateChanged(this.auth, async (user) => {
+                if (user) {
+                    resolve(true);
+                } else {
+                    console.log('User redirected to login');
+                    this.router.navigateByUrl('/login', { replaceUrl: true });
+                    reject(false);
+                }
+            });
+        });
+    }
 }

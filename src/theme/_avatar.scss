@@ -1,0 +1,162 @@
+$avatar-size-sidebar: 200px;
+
+.sidebar-avatar-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top:20px;
+
+  .avatar {
+    height: 200px;
+    width: 200px;
+    z-index: 6;
+
+    svg {
+      height: 200px;
+      width: 200px;
+    }
+  }
+}
+
+.card-avatar {
+  .avatar {
+    height: 260px;
+    width: 260px;
+    z-index: 6;
+
+    svg {
+      height: 260px;
+      width: 260px;
+    }
+  }
+}
+
+.skin-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  .avatar-title {
+    padding-bottom: 15px;
+    width: 100%;
+  }
+}
+
+.avatar-choice-wrapper-hair {
+  display: flex;
+}
+.avatar-choice-skincolor {
+  align-items: center;
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+  width: 14%;
+
+  label {
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  input {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.avatar-choice-haircolor {
+  align-items: center;
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+  width: 11%;
+
+  label {
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  input {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.avatar-choice-clothcolor {
+  align-items: center;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 11%;
+
+  label {
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  input {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.avatar {
+  border-radius: 100%;
+  height: $avatar-size-sidebar;
+  margin: 40px auto;
+  overflow: hidden;
+  position: relative;
+  width: $avatar-size-sidebar;
+
+  svg {
+    height: $avatar-size-sidebar;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: $avatar-size-sidebar;
+  }
+}
+.avatar-wrapper {
+  padding-bottom: 15px;
+}
+
+.phoneKeypadWrapper {
+  padding:0 15px;
+  .key {
+    font-size: 25px;
+  }
+  .keyWrapper {
+    text-align: center;
+    border: 1px solid grey;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .characterWrapper {
+
+  }
+  .character {
+    border: none;
+    border-bottom: 1px solid grey;
+    text-align: center;
+    width: 15px;
+    margin: 0 1px;
+    padding: 0;
+  }
+}

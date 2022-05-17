@@ -1,0 +1,21 @@
+.side-menu {
+  background-color: blue;
+}
+
+#sidemenu-list {
+  background: transparent;
+}
+#sidemenu-list ion-item {
+  --background: transparent;
+  --color: #fff;
+}
+#sidemenu-list ion-item.selected {
+  --color: var(--ion-color-primary);
+}
+#sidemenu-list ion-icon {
+  color: #fff;
+  margin: 0 20px 0 20px;
+  stroke: #fff;
+}
+
+/*# sourceMappingURL=sidemenu.component.css.map */

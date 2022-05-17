@@ -4,3 +4,13 @@
 // styles are for the entire app and not just one component. Additionally, this 
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
+
+.mainLoggedIn {
+    margin-top:56px;
+}
+
+#background-content {
+    background: rgb(9,9,121);
+    background: linear-gradient(307deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+}
+

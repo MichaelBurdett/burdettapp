@@ -1,0 +1,16 @@
+export interface Avatar {
+  current_accessory       : string,
+  current_tone            : string,
+  current_clothes         : string,
+  current_eyes            : string,
+  current_eyebrows        : string,
+  current_mouth           : string,
+  current_hairstyle       : string,
+  current_tattoo          : string,
+  current_hairface        : string,
+  current_haircolor       : [string, string, string],
+  current_fabriccolors    : string,
+  current_backgroundcolor : string,
+  current_glasses         : string,
+  current_glassopacity    : string,
+}

@@ -11,7 +11,10 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
   @ViewChild(AuthFormComponent) loginForm: AuthFormComponent;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+      private authService: AuthService,
+      private router: Router
+  ) {}
 
   ngOnInit() {}
 
