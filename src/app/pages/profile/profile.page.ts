@@ -22,6 +22,28 @@ export class ProfilePage implements OnDestroy, OnInit {
   public userData: any;
   public loading: boolean = true;
 
+  achievements: any = [
+      {
+    id        : 1,
+    title     : 'Unsavoury Username',
+    desc      : 'Entered at least one banned word as a potential username',
+    unlocked  : false
+  },
+    {
+    id        : 2,
+    title     : 'Awesome Avatar',
+    desc      : 'Found the hidden Duggee in the Avatar',
+
+    unlocked  : false
+  }, {
+    id        : 3,
+    title     : 'Achievement 3',
+    desc      : 'Desc to follow',
+    unlocked  : false
+  }];
+
+
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -36,20 +58,13 @@ export class ProfilePage implements OnDestroy, OnInit {
           .getUserProfile()
           .subscribe((userProfile: UserProfile) => {
             this.userData = userProfile;
-            console.log(this.userData);
+            this.loadAchievements(this.userData.achievements);
             this.profileStore.setState(userProfile);
             this.loading = false;
           });
     } else {
       this.loading = false;
     }
-    // this.userProfileSubscription = this.profileService
-    //   .getUserProfile()
-    //   .subscribe((userProfile: UserProfile) => {
-    //     this.userData = userProfile;
-    //     console.log(this.userData);
-    //     this.profileStore.setState(userProfile);
-    //   });
   }
 
   ngOnDestroy(): void {
@@ -59,6 +74,16 @@ export class ProfilePage implements OnDestroy, OnInit {
   async logOut(): Promise<void> {
     await this.authService.logout();
     this.router.navigateByUrl('login');
+  }
+
+  loadAchievements(achievements) {
+      let countIndex = 0;
+      for (let achievementValue of achievements) {
+          if (achievementValue === 1) {
+            this.achievements[countIndex].unlocked = true;
+          }
+          countIndex++;
+      }
   }
 
   updateName(): void {
@@ -90,12 +115,13 @@ export class ProfilePage implements OnDestroy, OnInit {
   updateDisplayName(): void {
     this.userProfileSubscription = this.userProfile$.pipe(first()).subscribe(async userProfile => {
       const alert = await this.alertCtrl.create({
-        subHeader: 'Your display name',
+        header: 'Update display name',
+        subHeader: '',
         inputs: [
           {
             type: 'text',
             name: 'displayName',
-            placeholder: 'Your display name',
+            placeholder: 'Update your display name',
             value: this.userData.displayName,
           },
         ],
@@ -104,7 +130,13 @@ export class ProfilePage implements OnDestroy, OnInit {
           {
             text: 'Save',
             handler: data => {
-              this.profileStore.updateDisplayName(data.displayName);
+              if (data.displayName === 'Test') {
+                alert.subHeader = 'naughty named detected!';
+                return false
+              } else {
+                this.profileStore.updateDisplayName(data.displayName);
+              }
+
             },
           },
         ],

@@ -34,6 +34,25 @@ ion-list-header {
 
 }
 
+.achievement-inactive {
+  ion-icon {
+    background-color: #c8c5c5;
+    border-radius: 100%;
+    padding: 15px;
+    border: 2px solid grey;
+  }
+}
+
+.achievement-active {
+  ion-icon {
+    background-color: #c8c5c5;
+    color:#FFD700;
+    border-radius: 100%;
+    box-shadow: 0 1px 5px 0 #000000;
+    padding: 15px;
+    border: 2px solid #FFD700;;
+  }
+}
 //ion-item {
 //  border:1px solid #ff0;
 //}
