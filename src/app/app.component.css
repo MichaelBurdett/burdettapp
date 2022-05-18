@@ -7,4 +7,24 @@
   background: linear-gradient(307deg, #090979 0%, #00d4ff 100%);
 }
 
+.side-menu {
+  background-color: blue;
+}
+
+#sidemenu-list {
+  background: transparent;
+}
+#sidemenu-list ion-item {
+  --background: transparent;
+  --color: #fff;
+}
+#sidemenu-list ion-item.selected {
+  --color: var(--ion-color-primary);
+}
+#sidemenu-list ion-icon {
+  color: #fff;
+  margin: 0 20px 0 20px;
+  stroke: #fff;
+}
+
 /*# sourceMappingURL=app.component.css.map */

@@ -42,6 +42,16 @@ export class ProfileService {
     );
   }
 
+    updateDisplayName(displayName: string): Observable<DocumentReference<DocumentData>> {
+        return this.getUserProfileReference().pipe(
+            tap({
+                next: userProfileReference => setDoc(userProfileReference, { displayName }, { merge: true }),
+                error: error => console.error(error),
+            }),
+            catchError(() => EMPTY)
+        );
+    }
+
   updateEmail(newEmail: string, password: string): Observable<unknown> {
     return forkJoin([
       this.getUserProfile().pipe(first()),

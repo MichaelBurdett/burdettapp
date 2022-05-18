@@ -1,0 +1,32 @@
+ion-list-header {
+  background-color: #ececec;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.placeholder-profile {
+  color: #cccccc;
+}
+
+.profile-item ion-button {
+  margin: 12px 0 0;
+  height: 30px;
+  --padding-end: 10px;
+  --padding-start: 10px;
+}
+.profile-item ion-button ion-icon {
+  margin-left: 8px;
+  margin-top: -3px;
+}
+.profile-item ion-input[readonly] {
+  pointer-events: none;
+  touch-action: none;
+}
+
+/*# sourceMappingURL=profile.page.css.map */

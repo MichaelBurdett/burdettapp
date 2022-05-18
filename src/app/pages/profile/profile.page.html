@@ -1,49 +1,172 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-buttons slot="end">
+        <ion-button (click)="logOut()">
+          <ion-icon slot="icon-only" name="log-out"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-buttons>
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-list>
     <ion-list-header> Personal Information </ion-list-header>
   </ion-list>
-  <ion-item (click)="updateName()">
-    <ion-label>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="text-left" size="5"> Name </ion-col>
-          <ion-col class="text-center" size="7" *ngIf="(userProfile$ | async )?.fullName">
-            {{(userProfile$ | async )?.fullName}}
-          </ion-col>
-          <ion-col size="7" class="placeholder-profile text-center" *ngIf="!(userProfile$ | async )?.fullName">
-            <span> Tap here to edit. </span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-label>
-  </ion-item>
 
-  <ion-item (click)="updateEmail()">
-    <ion-label>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="text-left" size="5"> Email </ion-col>
-          <ion-col class="text-center" size="7" *ngIf="(userProfile$ | async )?.email">
-            {{(userProfile$ | async )?.email}}
-          </ion-col>
-          <ion-col size="7" class="placeholder-profile text-center" *ngIf="!(userProfile$ | async )?.email">
-            <span> Tap here to edit. </span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-label>
-  </ion-item>
 
-  <ion-item (click)="updatePassword()">
-    <ion-label>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="text-left" size="5"> Password </ion-col>
-          <ion-col class="text-center" size="7" class="placeholder-profile">
-            <span> Tap here to edit. </span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-label>
-  </ion-item>
+<!--  <ion-grid>-->
+<!--    <ion-row>-->
+<!--      <ion-col size="12" size-sm="6">-->
+<!--        <ion-item >-->
+<!--          <ion-col class="text-left"  size="2"> Name: </ion-col>-->
+<!--          <ion-col class="text-left"  size="9" *ngIf="(userProfile$ | async )?.fullName">-->
+<!--            {{(userProfile$ | async )?.fullName}}-->
+<!--          </ion-col>-->
+<!--          <ion-col class="text-right" size="1" >-->
+<!--            <ion-icon name="create-outline" (click)="updateName()"></ion-icon>-->
+<!--          </ion-col>-->
+<!--        </ion-item>-->
+<!--      </ion-col>-->
+<!--      <ion-col size="12" size-sm="6">-->
+
+<!--      </ion-col>-->
+<!--      <ion-col size="12" size-sm="6">-->
+
+<!--      </ion-col>-->
+      <!--
+        Size=12 is the size the col will be below the sm breakpoint,
+        whilst 3 is the size above the sm breakpoint
+        but below the md breakpoint
+      -->
+
+<!--    </ion-row>-->
+<!--  </ion-grid>-->
+<!--      <ion-grid>-->
+<!--        <ion-row class="no-padding">-->
+<!--          <ion-label>-->
+<!--            <ion-col size="12" size-sm="12" size-md="6">-->
+
+<!--            </ion-col>-->
+<!--          </ion-label>-->
+<!--          <ion-label>-->
+<!--            <ion-col size="12" size-sm="12" size-md="6">-->
+<!--              <ion-item >-->
+<!--                <ion-col class="text-left" size="2"> Email: </ion-col>-->
+<!--                <ion-col class="text-left" size="9" *ngIf="(userProfile$ | async )?.email">{{(userProfile$ | async )?.email}}</ion-col>-->
+<!--                <ion-col class="text-left placeholder-profile" size="9" *ngIf="!(userProfile$ | async )?.email"><span> Tap here to edit. </span></ion-col>-->
+<!--                <ion-col class="text-right" size="1">-->
+<!--                  <ion-icon name="create-outline" (click)="updateEmail()"></ion-icon>-->
+<!--                </ion-col>-->
+<!--              </ion-item>-->
+<!--            </ion-col>-->
+<!--          </ion-label>-->
+<!--        </ion-row>-->
+<!--      </ion-grid>-->
+
+<!--  <ion-item (click)="updatePassword()">-->
+<!--    <ion-label>-->
+<!--      <ion-grid>-->
+<!--        <ion-row>-->
+<!--          <ion-col class="text-left" size="5"> Password </ion-col>-->
+<!--          <ion-col class="text-center" size="7" class="placeholder-profile">-->
+<!--            <span> Tap here to edit. </span>-->
+<!--          </ion-col>-->
+<!--        </ion-row>-->
+<!--      </ion-grid>-->
+<!--    </ion-label>-->
+<!--  </ion-item>-->
+  <p>{{this.userData | json}}</p>
+  <form *ngIf="!this.loading">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-lg="6" size-md="6" size-sm="6" size="12">
+          <ion-item class="profile-item">
+            <ion-label position="floating">Full Name</ion-label>
+            <ion-input type="text" [disabled]="true" [ngModel]="this.userData.fullName" [ngModelOptions]="{standalone: true}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6" size-sm="6" size="12">
+          <ion-item class="profile-item">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" [disabled]="true" [ngModel]="this.userData.email" [ngModelOptions]="{standalone: true}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6" size-sm="6" size="12">
+          <ion-item class="profile-item">
+            <ion-label position="floating">Display Name</ion-label>
+            <ion-input type="text" [readonly]="true" [ngModel]="this.userData.displayName || 'None set'" [ngModelOptions]="{standalone: true}"></ion-input>
+            <ion-button slot="end" color="primary" (click)="this.updateDisplayName()">Edit <ion-icon name="create-outline"></ion-icon></ion-button>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6" size-sm="6" size="12">
+          <ion-item class="profile-item">
+            <ion-label position="floating">Last Signin</ion-label>
+            <ion-input type="text" [disabled]="true" [ngModel]="this.userData.lastLogin" [ngModelOptions]="{standalone: true}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6" size-sm="6" size="12">
+          <ion-item class="profile-item">
+            <ion-label position="floating">Account Created</ion-label>
+            <ion-input type="text" [disabled]="true" [ngModel]="this.userData.created" [ngModelOptions]="{standalone: true}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6" size-sm="6" size="12">
+          <ion-item>
+            <ion-label position="floating">Country</ion-label>
+            <ion-select value="usa" okText="Okay" cancelText="Dismiss">
+              <ion-select-option value="usa">United States</ion-select-option>
+              <ion-select-option value="india">India</ion-select-option>
+              <ion-select-option value="france">France</ion-select-option>
+              <ion-select-option value="spain">Spain</ion-select-option>
+              <ion-select-option value="brazil">Brazil</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="4" size-sm="4" size="12">
+          <ion-item>
+            <ion-label position="floating">Choose City</ion-label>
+            <ion-select value="california" okText="Okay" cancelText="Dismiss">
+              <ion-select-option value="california">California</ion-select-option>
+              <ion-select-option value="illinois">Illinois</ion-select-option>
+              <ion-select-option value="texas">Texas</ion-select-option>
+              <ion-select-option value="pennsylvania">Pennsylvania</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6" size-sm="4" size="12">
+          <ion-item>
+            <ion-label position="floating">Address</ion-label>
+            <ion-textarea></ion-textarea>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="6" size-md="6" size-sm="4" size="12">
+          <ion-item>
+            <ion-label position="floating">Postal Code</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="4" size-md="4" size-sm="4" size="12">
+          <ion-item>
+            <ion-label position="floating">Gender</ion-label>
+            <ion-select value="male" okText="Okay" cancelText="Dismiss">
+              <ion-select-option value="male">Male</ion-select-option>
+              <ion-select-option value="female">female</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size-lg="4" size-md="4" size-sm="4" size="12">
+          <ion-item>
+            <ion-label position="floating">Age</ion-label>
+            <ion-input type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
 </ion-content>

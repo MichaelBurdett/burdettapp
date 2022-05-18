@@ -15,8 +15,13 @@ import { ProfileStore } from './profile.store';
   providers: [ProfileStore],
 })
 export class ProfilePage implements OnDestroy, OnInit {
+
   public userProfile$: Observable<UserProfile> = this.profileStore.userProfile$;
   private userProfileSubscription: Subscription;
+
+  public userData: any;
+  public loading: boolean = true;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -26,9 +31,25 @@ export class ProfilePage implements OnDestroy, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userProfileSubscription = this.profileService
-      .getUserProfile()
-      .subscribe((userProfile: UserProfile) => this.profileStore.setState(userProfile));
+    if (!this.userData) {
+      this.userProfileSubscription = this.profileService
+          .getUserProfile()
+          .subscribe((userProfile: UserProfile) => {
+            this.userData = userProfile;
+            console.log(this.userData);
+            this.profileStore.setState(userProfile);
+            this.loading = false;
+          });
+    } else {
+      this.loading = false;
+    }
+    // this.userProfileSubscription = this.profileService
+    //   .getUserProfile()
+    //   .subscribe((userProfile: UserProfile) => {
+    //     this.userData = userProfile;
+    //     console.log(this.userData);
+    //     this.profileStore.setState(userProfile);
+    //   });
   }
 
   ngOnDestroy(): void {
@@ -58,6 +79,32 @@ export class ProfilePage implements OnDestroy, OnInit {
             text: 'Save',
             handler: data => {
               this.profileStore.updateUserName(data.fullName);
+            },
+          },
+        ],
+      });
+      return await alert.present();
+    });
+  }
+
+  updateDisplayName(): void {
+    this.userProfileSubscription = this.userProfile$.pipe(first()).subscribe(async userProfile => {
+      const alert = await this.alertCtrl.create({
+        subHeader: 'Your display name',
+        inputs: [
+          {
+            type: 'text',
+            name: 'displayName',
+            placeholder: 'Your display name',
+            value: this.userData.displayName,
+          },
+        ],
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: 'Save',
+            handler: data => {
+              this.profileStore.updateDisplayName(data.displayName);
             },
           },
         ],

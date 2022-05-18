@@ -1,19 +1,20 @@
 <ion-app>
-  <div id="main">
-    <ion-toolbar *ngIf="displayHeader()">
-      <ion-buttons slot="start">
-        <ion-menu-button autoHide="false"></ion-menu-button>
-      </ion-buttons>
-      <ion-buttons slot="secondary">
-        <ion-buttons slot="end">
-          <ion-button (click)="logOut()">
-            <ion-icon slot="icon-only" name="log-out"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-buttons>
-      <ion-title>Burdett App Test</ion-title>
-    </ion-toolbar>
-    <ion-router-outlet id="main" [ngClass]="{'mainLoggedIn': displayHeader()}"></ion-router-outlet>
-  </div>
-  <app-sidemenu></app-sidemenu>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay" *ngIf="displayHeader()">
+      <ion-content class="side-menu" style="--background:linear-gradient(to right, #045de9, #09c6f9)">
+        <div class="user_man_div">
+          <app-block-avatar></app-block-avatar>
+        </div>
+        <ion-list id="sidemenu-list">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index;">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [name]="p.icon"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

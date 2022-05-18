@@ -5,14 +5,23 @@ import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ProfileService } from './profile.service';
 
 export interface ProfileState {
-  email: string;
-  fullName: string;
+    email: string;
+    fullName: string;
+    displayName: string;
+    lastLogin: string;
+    created: string;
 }
 
 @Injectable()
 export class ProfileStore extends ComponentStore<ProfileState> {
   constructor(private readonly profileService: ProfileService) {
-    super({ email: '', fullName: '' });
+    super({
+        email: '',
+        fullName: '',
+        displayName: '',
+        lastLogin: '',
+        created: ''
+    });
   }
 
   readonly userProfile$: Observable<ProfileState> = this.select(state => state);
@@ -34,6 +43,20 @@ export class ProfileStore extends ComponentStore<ProfileState> {
       })
     );
   });
+
+    readonly updateDisplayName = this.effect((displayName$: Observable<string>) => {
+        return displayName$.pipe(
+            switchMap(displayName => {
+                return this.profileService.updateDisplayName(displayName).pipe(
+                    tap({
+                        next: () => this.updateDisplayName(displayName),
+                        error: e => console.log(e),
+                    }),
+                    catchError(() => EMPTY)
+                );
+            })
+        );
+    });
 
   readonly updateUserEmail = this.effect((credential$: Observable<{ email: string; password: string }>) => {
     return credential$.pipe(

@@ -4,6 +4,9 @@ export interface UserCredential {
 }
 
 export interface UserProfile {
-  email: string;
   fullName: string;
+  email: string;
+  displayName: string;
+  lastLogin: string;
+  created: string;
 }

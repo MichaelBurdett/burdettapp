@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from 'src/app/services/auth.service';
+import {Auth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,20 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  public   appPages = [
+    {title: 'Home', url: '/home', icon: 'home-outline'},
+    {title: 'My Profile', url: '/profile', icon: 'person-outline'},
+    {title: 'Switch City', url: '/settings/set-location', icon: '🏙'},
+    {title: "Promotions", url: "/promotions", icon: "💸"}
+  ];
+
   constructor(
-      private authService: AuthService,
+      private auth: Auth,
+      public authService: AuthService,
       private router : Router
   ) {}
+
 
   displayHeader() {
     return this.router.url !== '/login';

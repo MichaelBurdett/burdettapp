@@ -14,3 +14,25 @@
     background: linear-gradient(307deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
 }
 
+.side-menu {
+    background-color: blue;
+}
+
+#sidemenu-list {
+    background: transparent;
+
+    ion-item {
+        --background: transparent;
+        --color: #fff;
+    }
+
+    ion-item.selected {
+        --color: var(--ion-color-primary);
+    }
+
+    ion-icon {
+        color: #fff;
+        margin: 0 20px 0 20px;
+        stroke: #fff;
+    }
+}

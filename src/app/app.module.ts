@@ -6,8 +6,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
-import {SidemenuComponent} from "./components/sidemenu/sidemenu.component";
-import {BlockAvatarComponent} from "./components/block-avatar/block-avatar.component";
+
+import { BlockAvatarComponent} from "./components/block-avatar/block-avatar.component";
 import { AppRoutingModule } from './app-routing.module';
 
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -16,13 +16,9 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
 import { environment } from '../environments/environment';
 
-
-
-
 @NgModule({
     declarations: [
         AppComponent,
-        SidemenuComponent,
         BlockAvatarComponent],
     entryComponents: [],
     imports: [
@@ -37,7 +33,6 @@ import { environment } from '../environments/environment';
     providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
     bootstrap: [AppComponent],
     exports: [
-        SidemenuComponent,
         BlockAvatarComponent
     ]
 })
