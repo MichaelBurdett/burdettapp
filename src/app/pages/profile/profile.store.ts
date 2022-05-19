@@ -44,7 +44,7 @@ export class ProfileStore extends ComponentStore<ProfileState> {
     );
   });
 
-    readonly updateDisplayName = this.effect((displayName$: Observable<string>) => {
+  readonly updateDisplayName = this.effect((displayName$: Observable<string>) => {
         return displayName$.pipe(
             switchMap(displayName => {
                 return this.profileService.updateDisplayName(displayName).pipe(
@@ -85,4 +85,19 @@ export class ProfileStore extends ComponentStore<ProfileState> {
       )
     );
   });
+
+  readonly updateAchievements = this.effect((achievements$: Observable<number[]>) => {
+        return achievements$.pipe(
+            switchMap(achievements => {
+                return this.profileService.updateAchievements(achievements).pipe(
+                    tap({
+                        next: () => this.updateDisplayName(achievements),
+                        error: e => console.log(e),
+                    }),
+                    catchError(() => EMPTY)
+                );
+            })
+        );
+  });
+
 }

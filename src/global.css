@@ -159,4 +159,10 @@
   padding: 0;
 }
 
+ion-toast.toast-achievement {
+  --max-width: 350px;
+  --text-align: center !important;
+  text-align: center;
+}
+
 /*# sourceMappingURL=global.css.map */

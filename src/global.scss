@@ -26,3 +26,11 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 @import "theme/_avatar.scss";
+
+
+ion-toast.toast-achievement  {
+  --max-width: 350px;
+  --text-align: center !important;
+  text-align: center;
+}
+

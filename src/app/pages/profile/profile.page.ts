@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { UserProfile } from 'src/app/models/user';
 import { ProfileService } from './profile.service';
 import { Observable, Subscription } from 'rxjs';
@@ -50,6 +51,7 @@ export class ProfilePage implements OnDestroy, OnInit {
     private router: Router,
     private profileService: ProfileService,
     private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
     private readonly profileStore: ProfileStore,
     private http : HttpClient
   ) {}
@@ -138,6 +140,7 @@ export class ProfilePage implements OnDestroy, OnInit {
               const tmpName = data.displayName.toLowerCase();
               if (this.naughtyWordList.indexOf(tmpName) > -1) {
                 alert.subHeader = 'Naughty named detected!';
+                this.checkAchievement(0);
                 return false
               } else {
                 this.profileStore.updateDisplayName(data.displayName);
@@ -186,5 +189,35 @@ export class ProfilePage implements OnDestroy, OnInit {
       ],
     });
     return await alert.present();
+  }
+
+  async checkAchievement(achievement) {
+    if (this.achievements[achievement].unlocked === true){
+      console.log('Already unlocked')
+    } else {
+      console.log('Not unlocked!')
+      const toast = await this.toastCtrl.create({
+        header: 'Achievement Unlocked!',
+        message: '',
+        duration: 3000,
+        cssClass: 'toast-achievement',
+        icon: 'trophy',
+        position: 'top'
+      });
+      await toast.present();
+      // const { role } = await toast.onDidDismiss();
+      // console.log('onDidDismiss resolved with role', role);
+      this.achievements[achievement].unlocked = true;
+
+      let tmpAchievements: number[] = [];
+      for (let achievement of this.achievements) {
+        if (achievement.unlocked === true) {
+          tmpAchievements.push(1);
+        } else {
+          tmpAchievements.push(0);
+        }
+      }
+      this.profileStore.updateAchievements(tmpAchievements);
+    }
   }
 }

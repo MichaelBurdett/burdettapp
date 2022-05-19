@@ -42,7 +42,7 @@ export class ProfileService {
     );
   }
 
-    updateDisplayName(displayName: string): Observable<DocumentReference<DocumentData>> {
+  updateDisplayName(displayName: string): Observable<DocumentReference<DocumentData>> {
         return this.getUserProfileReference().pipe(
             tap({
                 next: userProfileReference => setDoc(userProfileReference, { displayName }, { merge: true }),
@@ -90,4 +90,15 @@ export class ProfileService {
       })
     );
   }
+
+  updateAchievements(achievements: number[]): Observable<DocumentReference<DocumentData>> {
+        return this.getUserProfileReference().pipe(
+            tap({
+                next: userProfileReference => setDoc(userProfileReference, { achievements }, { merge: true }),
+                error: error => console.error(error),
+            }),
+            catchError(() => EMPTY)
+        );
+    }
+
 }
