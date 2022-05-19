@@ -5,8 +5,9 @@ import { AlertController } from '@ionic/angular';
 import { UserProfile } from 'src/app/models/user';
 import { ProfileService } from './profile.service';
 import { Observable, Subscription } from 'rxjs';
-import { first, tap } from 'rxjs/operators';
+import {first, map, tap} from 'rxjs/operators';
 import { ProfileStore } from './profile.store';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,7 @@ export class ProfilePage implements OnDestroy, OnInit {
 
   public userData: any;
   public loading: boolean = true;
-
+  public naughtyWordList: any;
   achievements: any = [
       {
     id        : 1,
@@ -49,10 +50,14 @@ export class ProfilePage implements OnDestroy, OnInit {
     private router: Router,
     private profileService: ProfileService,
     private alertCtrl: AlertController,
-    private readonly profileStore: ProfileStore
+    private readonly profileStore: ProfileStore,
+    private http : HttpClient
   ) {}
 
   ngOnInit(): void {
+     this.http.get('/assets/badwords.txt', { responseType: 'text'}).subscribe(data => {
+       this.naughtyWordList = data
+     })
     if (!this.userData) {
       this.userProfileSubscription = this.profileService
           .getUserProfile()
@@ -112,8 +117,8 @@ export class ProfilePage implements OnDestroy, OnInit {
     });
   }
 
-  updateDisplayName(): void {
-    this.userProfileSubscription = this.userProfile$.pipe(first()).subscribe(async userProfile => {
+   updateDisplayName(): void {
+      this.userProfileSubscription = this.userProfile$.pipe(first()).subscribe(async userProfile => {
       const alert = await this.alertCtrl.create({
         header: 'Update display name',
         subHeader: '',
@@ -130,13 +135,13 @@ export class ProfilePage implements OnDestroy, OnInit {
           {
             text: 'Save',
             handler: data => {
-              if (data.displayName === 'Test') {
-                alert.subHeader = 'naughty named detected!';
+              const tmpName = data.displayName.toLowerCase();
+              if (this.naughtyWordList.indexOf(tmpName) > -1) {
+                alert.subHeader = 'Naughty named detected!';
                 return false
               } else {
                 this.profileStore.updateDisplayName(data.displayName);
               }
-
             },
           },
         ],
