@@ -8,7 +8,7 @@ export interface ProfileState {
     email: string;
     fullName: string;
     displayName: string;
-    lastLogin: string;
+    lastSignIn: string;
     created: string;
 }
 
@@ -19,7 +19,7 @@ export class ProfileStore extends ComponentStore<ProfileState> {
         email: '',
         fullName: '',
         displayName: '',
-        lastLogin: '',
+        lastSignIn: '',
         created: ''
     });
   }
@@ -91,7 +91,7 @@ export class ProfileStore extends ComponentStore<ProfileState> {
             switchMap(achievements => {
                 return this.profileService.updateAchievements(achievements).pipe(
                     tap({
-                        next: () => this.updateDisplayName(achievements),
+                        next: () => this.updateAchievements(achievements),
                         error: e => console.log(e),
                     }),
                     catchError(() => EMPTY)

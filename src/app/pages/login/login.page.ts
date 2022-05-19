@@ -3,6 +3,7 @@ import { UserCredential } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthFormComponent } from 'src/app/components/auth-form/auth-form.component';
 import { Router } from '@angular/router';
+import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginPage implements OnInit {
   @ViewChild(AuthFormComponent) loginForm: AuthFormComponent;
   constructor(
       private authService: AuthService,
+      private firestore: Firestore,
       private router: Router
   ) {}
 
@@ -22,6 +24,7 @@ export class LoginPage implements OnInit {
     try {
       const userCredential = await this.authService.login(credentials.email, credentials.password);
       this.authService.userId = userCredential.user.uid;
+      this.setLastLogin(userCredential.user.uid, userCredential.user.metadata.lastSignInTime);
       await this.loginForm.hideLoading();
       this.router.navigateByUrl('home');
     } catch (error) {
@@ -29,4 +32,10 @@ export class LoginPage implements OnInit {
       this.loginForm.handleError(error);
     }
   }
+
+  setLastLogin(userUid, lastSignIn){
+    const userReference = doc(this.firestore, `users/${userUid}`);
+    setDoc(userReference, { lastSignIn }, { merge: true });
+  }
+
 }

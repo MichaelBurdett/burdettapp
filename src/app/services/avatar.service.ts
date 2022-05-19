@@ -91,7 +91,7 @@ export class AvatarService {
           this.avatarConfig.current_backgroundcolor = remoteAvatarData.current_backgroundcolor;
           this.avatarConfig.current_glasses = remoteAvatarData.current_glasses;
           this.avatarConfig.current_glassopacity = remoteAvatarData.current_glassopacity;
-          // this.avatarLoaded = true;
+          this.avatarLoaded = true;
           console.log(this.avatarConfig);
         } else {
           // doc.data() will be undefined in this case

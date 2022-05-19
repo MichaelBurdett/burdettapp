@@ -120,6 +120,7 @@ export class ProfilePage implements OnDestroy, OnInit {
   }
 
    updateDisplayName(): void {
+      let currentDisplayName = this.userData.displayName;
       this.userProfileSubscription = this.userProfile$.pipe(first()).subscribe(async userProfile => {
       const alert = await this.alertCtrl.create({
         header: 'Update display name',
@@ -142,8 +143,11 @@ export class ProfilePage implements OnDestroy, OnInit {
                 alert.subHeader = 'Naughty named detected!';
                 this.checkAchievement(0);
                 return false
-              } else {
+              } else if (this.naughtyWordList.indexOf(tmpName) === -1){
+                console.log('Firing anyway');
                 this.profileStore.updateDisplayName(data.displayName);
+              } else {
+                console.log('Not sure how we got here')
               }
             },
           },
@@ -205,8 +209,7 @@ export class ProfilePage implements OnDestroy, OnInit {
         position: 'top'
       });
       await toast.present();
-      // const { role } = await toast.onDidDismiss();
-      // console.log('onDidDismiss resolved with role', role);
+
       this.achievements[achievement].unlocked = true;
 
       let tmpAchievements: number[] = [];

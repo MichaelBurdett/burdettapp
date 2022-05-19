@@ -7,6 +7,6 @@ export interface UserProfile {
   fullName: string;
   email: string;
   displayName: string;
-  lastLogin: string;
+  lastSignIn: string;
   created: string;
 }
