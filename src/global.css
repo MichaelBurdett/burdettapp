@@ -159,6 +159,12 @@
   padding: 0;
 }
 
+.avatar-label {
+  align-items: center;
+  display: flex !important;
+  justify-content: space-between;
+}
+
 ion-toast.toast-achievement {
   --max-width: 350px;
   --text-align: center !important;

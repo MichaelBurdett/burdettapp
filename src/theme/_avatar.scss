@@ -44,6 +44,7 @@ $avatar-size-sidebar: 200px;
 .avatar-choice-wrapper-hair {
   display: flex;
 }
+
 .avatar-choice-skincolor {
   align-items: center;
   display: flex;
@@ -130,6 +131,7 @@ $avatar-size-sidebar: 200px;
     width: $avatar-size-sidebar;
   }
 }
+
 .avatar-wrapper {
   padding-bottom: 15px;
 }
@@ -159,4 +161,10 @@ $avatar-size-sidebar: 200px;
     margin: 0 1px;
     padding: 0;
   }
+}
+
+.avatar-label {
+  align-items: center;
+  display: flex !important;
+  justify-content: space-between;
 }

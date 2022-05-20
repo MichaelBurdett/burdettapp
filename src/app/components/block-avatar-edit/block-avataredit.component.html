@@ -1,200 +1,236 @@
-<div class="avatar-wrapper">
-    <mat-accordion>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Edit Avatar Hair
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Hair - Style:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarHairPrev(this.activeIndexHair)" [disabled]="this.activeIndexHair === 0">
-                    Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarHairNext(this.activeIndexHair)"
-                        [disabled]="this.activeIndexHair === avatar.hairstyles.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_hairstyle}}</p>
-                <p class="avatar-count">{{this.activeIndexHair + 1}}/{{avatar.hairstyles.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Hair - Facial:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarHairFacePrev(this.activeIndexHairFace)"
-                        [disabled]="this.activeIndexHairFace === 0">Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarHairFaceNext(this.activeIndexHairFace)"
-                        [disabled]="this.activeIndexHairFace === avatar.facialhairs.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_hairface}}</p>
-                <p class="avatar-count">{{this.activeIndexHairFace + 1}}/{{avatar.facialhairs.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Hair - Color set:</b></p>
-                <div class="avatar-choice-wrapper-hair">
-                    <div class="avatar-choice-haircolor" *ngFor="let haircolor of avatar.haircolors; let index=index"
-                         (click)="updateAvatarHairColor(haircolor)">
-                        <input type="radio" id="{{haircolor[index]}}" name="haircolor" value="#{{haircolor}}"
-                               [checked]="avatar.avatarConfig.current_haircolor == haircolor">
-                        <label for="{{haircolor[index]}}" *ngFor='let subhaircolor of haircolor; let index=index'
-                               [ngStyle]="{backgroundColor: '#' + haircolor[index] }"></label>
-                    </div>
-                </div>
-            </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Edit Avatar Face
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Eyes:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarEyePrev(this.activeIndexEyes)" [disabled]="this.activeIndexEyes === 0">Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarEyeNext(this.activeIndexEyes)"
-                        [disabled]="this.activeIndexEyes === avatar.eyes.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_eyes}}</p>
-                <p class="avatar-count">{{this.activeIndexEyes + 1}}/{{avatar.eyes.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Eyebrows:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarEyeBrowsPrev(this.activeIndexEyebrows)"
-                        [disabled]="this.activeIndexEyebrows === 0">Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarEyeBrowsNext(this.activeIndexEyebrows)"
-                        [disabled]="this.activeIndexEyebrows === avatar.eyebrows.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_eyebrows}}</p>
-                <p class="avatar-count">{{this.activeIndexEyebrows + 1}}/{{avatar.eyebrows.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Mouth:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarMouthPrev(this.activeIndexMouth)" [disabled]="this.activeIndexMouth === 0">
-                    Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarMouthNext(this.activeIndexMouth)"
-                        [disabled]="this.activeIndexMouth === avatar.mouths.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_mouth}}</p>
-                <p class="avatar-count">{{this.activeIndexMouth + 1}}/{{avatar.mouths.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper skin-wrapper">
-                <p class="avatar-title"><b>Skin Tone:</b></p>
-                <div class="avatar-choice-skincolor" *ngFor="let tone of avatar.tones; let index=index"
-                     (click)="updateAvatarTone(tone)">
-                    <input type="radio" id="{{tone}}" name="skincolor" value="#{{tone}}"
-                           [checked]="avatar.avatarConfig.current_tone == tone">
-                    <label for="{{tone}}" [ngStyle]="{backgroundColor: '#' + tone}"></label>
-                </div>
-            </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Edit Avatar Extras
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Glasses:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarGlasses(this.activeIndexGlasses - 1)"
-                        [disabled]="this.activeIndexGlasses === 0">Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarGlasses(this.activeIndexGlasses + 1)"
-                        [disabled]="this.activeIndexGlasses === avatar.glasses.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_glasses}}</p>
-                <p class="avatar-count">{{this.activeIndexGlasses + 1}}/{{avatar.glasses.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Glasses Opacity:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarGlassOpacity(this.activeIndexGlassOpacity - 1)"
-                        [disabled]="this.activeIndexGlassOpacity === 0">Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarGlassOpacity(this.activeIndexGlassOpacity + 1)"
-                        [disabled]="this.activeIndexGlassOpacity === avatar.glassopacities.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_glassopacity}}</p>
-                <p class="avatar-count">{{this.activeIndexGlassOpacity + 1}}/{{avatar.glassopacities.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Tattoos:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarTattoo(this.activeIndexTattoo - 1)"
-                        [disabled]="this.activeIndexTattoo === 0">Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarTattoo(this.activeIndexTattoo + 1)"
-                        [disabled]="this.activeIndexTattoo === avatar.tattoos.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_tattoo}}</p>
-                <p class="avatar-count">{{this.activeIndexTattoo + 1}}/{{avatar.tattoos.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Accessory:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarAccessory(this.activeIndexAccessory - 1)"
-                        [disabled]="this.activeIndexAccessory === 0">Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarAccessory(this.activeIndexAccessory + 1)"
-                        [disabled]="this.activeIndexAccessory === avatar.accesories.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_accessory}}</p>
-                <p class="avatar-count">{{this.activeIndexAccessory + 1}}/{{avatar.accesories.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper">
-                <p class="avatar-title"><b>Clothing:</b></p>
-                <button mat-raised-button class="btn btn-info pull-left"
-                        (click)="updateAvatarClothing(this.activeIndexClothing - 1)"
-                        [disabled]="this.activeIndexClothing === 0">Prev
-                </button>
-                <button mat-raised-button class="btn btn-info pull-right"
-                        (click)="updateAvatarClothing(this.activeIndexClothing + 1)"
-                        [disabled]="this.activeIndexClothing === avatar.clothes.length - 1">Next
-                </button>
-                <p class="avatar-value">{{this.avatar.avatarConfig.current_clothes}}</p>
-                <p class="avatar-count">{{this.activeIndexClothing + 1}}/{{avatar.clothes.length}}</p>
-            </div>
-            <div class="avatar-choice-wrapper skin-wrapper">
-                <p class="avatar-title"><b>Clothing Color:</b></p>
-                <div class="avatar-choice-clothcolor" *ngFor="let clothcolor of avatar.fabriccolors; let index=index"
-                     (click)="updateAvatarClothingColor(clothcolor)">
-                    <input type="radio" id="{{clothcolor}}" name="backgroundcolor" value="#{{clothcolor}}"
-                           [checked]="avatar.avatarConfig.current_fabriccolors == clothcolor">
-                    <label for="{{clothcolor}}" [ngStyle]="{backgroundColor: '#' + clothcolor}"></label>
-                </div>
-            </div>
-            <div class="avatar-choice-wrapper skin-wrapper">
-                <p class="avatar-title"><b>Background Color:</b></p>
-                <div class="avatar-choice-skincolor" *ngFor="let color of avatar.backgroundcolors; let index=index"
-                     (click)="updateAvatarBackground(color)">
-                    <input type="radio" id="{{color}}" name="backgroundcolor" value="#{{color}}"
-                           [checked]="avatar.avatarConfig.current_backgroundcolor == color">
-                    <label for="{{color}}" [ngStyle]="{backgroundColor: '#' + color}"></label>
-                </div>
-            </div>
-        </mat-expansion-panel>
-    </mat-accordion>
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Update Avatar</ion-title>
+    </ion-toolbar>
+</ion-header>
 
-</div>
-<button (click)="updateUserAvatar()"
-        [disabled]="submitting"
-        class="btn btn-info">
-    <span [hidden]="submitting">{{'Update Avatar'}}</span>
-    <span [hidden]="!submitting"><img width="21" src="/assets/img/ui/loading-spinner.svg" alt="Loading"></span>
-</button>
+<ion-content>
+
+
+
+    <ion-accordion-group>
+
+        <ion-accordion>
+            <ion-item slot="header">
+                <ion-label>Edit Avatar Hair</ion-label>
+            </ion-item>
+
+            <ion-list slot="content">
+                <ion-item>
+                    <ion-label class="avatar-label">
+                        <ion-button slot="start" (click)="updateAvatarHairPrev(this.activeIndexHair)" [disabled]="this.activeIndexHair === 0">
+                            <ion-icon name="chevron-back-outline"></ion-icon>
+                        </ion-button>
+                        <div class="ion-text-center">
+                            <p class="avatar-title"><b>Hair - Style:</b></p>
+                            <p class="avatar-value">{{this.avatar.avatarConfig.current_hairstyle}}</p>
+                            <p class="avatar-count">{{this.activeIndexHair + 1}}/{{avatar.hairstyles.length}}</p>
+                        </div>
+                        <ion-button slot="end" (click)="updateAvatarHairNext(this.activeIndexHair)" [disabled]="this.activeIndexHair === avatar.hairstyles.length - 1">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </ion-button>
+                    </ion-label>
+                </ion-item>
+                <ion-item>
+<!--                    <ion-label>Mike</ion-label>-->
+                    <div class="avatar-choice-wrapper">
+                        <p class="avatar-title"><b>Hair - Facial:</b></p>
+                        <button class="btn btn-info pull-left"
+                                (click)="updateAvatarHairFacePrev(this.activeIndexHairFace)"
+                                [disabled]="this.activeIndexHairFace === 0">Prev
+                        </button>
+                        <button class="btn btn-info pull-right"
+                                (click)="updateAvatarHairFaceNext(this.activeIndexHairFace)"
+                                [disabled]="this.activeIndexHairFace === avatar.facialhairs.length - 1">Next
+                        </button>
+                        <p class="avatar-value">{{this.avatar.avatarConfig.current_hairface}}</p>
+                        <p class="avatar-count">{{this.activeIndexHairFace + 1}}/{{avatar.facialhairs.length}}</p>
+                    </div>
+                </ion-item>
+                <ion-item>
+<!--                    <ion-label>Kim</ion-label>-->
+                    <div class="avatar-choice-wrapper">
+                        <p class="avatar-title"><b>Hair - Color set:</b></p>
+                        <div class="avatar-choice-wrapper-hair">
+                            <div class="avatar-choice-haircolor" *ngFor="let haircolor of avatar.haircolors; let index=index"
+                                 (click)="updateAvatarHairColor(haircolor)">
+                                <input type="radio" id="{{haircolor[index]}}" name="haircolor" value="#{{haircolor}}"
+                                       [checked]="avatar.avatarConfig.current_haircolor == haircolor">
+                                <label for="{{haircolor[index]}}" *ngFor='let subhaircolor of haircolor; let index=index'
+                                       [ngStyle]="{backgroundColor: '#' + haircolor[index] }"></label>
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group>
+</ion-content>
+
+
+
+
+
+<!--<div class="avatar-wrapper">-->
+<!--    <mat-accordion>-->
+<!--        <mat-expansion-panel>-->
+<!--            <mat-expansion-panel-header>-->
+<!--                <mat-panel-title>-->
+<!--                    Edit Avatar Hair-->
+<!--                </mat-panel-title>-->
+<!--            </mat-expansion-panel-header>-->
+
+<!--        </mat-expansion-panel>-->
+<!--        <mat-expansion-panel>-->
+<!--            <mat-expansion-panel-header>-->
+<!--                <mat-panel-title>-->
+<!--                    Edit Avatar Face-->
+<!--                </mat-panel-title>-->
+<!--            </mat-expansion-panel-header>-->
+<!--            <div class="avatar-choice-wrapper">-->
+<!--                <p class="avatar-title"><b>Eyes:</b></p>-->
+<!--                <button mat-raised-button class="btn btn-info pull-left"-->
+<!--                        (click)="updateAvatarEyePrev(this.activeIndexEyes)" [disabled]="this.activeIndexEyes === 0">Prev-->
+<!--                </button>-->
+<!--                <button mat-raised-button class="btn btn-info pull-right"-->
+<!--                        (click)="updateAvatarEyeNext(this.activeIndexEyes)"-->
+<!--                        [disabled]="this.activeIndexEyes === avatar.eyes.length - 1">Next-->
+<!--                </button>-->
+<!--                <p class="avatar-value">{{this.avatar.avatarConfig.current_eyes}}</p>-->
+<!--                <p class="avatar-count">{{this.activeIndexEyes + 1}}/{{avatar.eyes.length}}</p>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper">-->
+<!--                <p class="avatar-title"><b>Eyebrows:</b></p>-->
+<!--                <button mat-raised-button class="btn btn-info pull-left"-->
+<!--                        (click)="updateAvatarEyeBrowsPrev(this.activeIndexEyebrows)"-->
+<!--                        [disabled]="this.activeIndexEyebrows === 0">Prev-->
+<!--                </button>-->
+<!--                <button mat-raised-button class="btn btn-info pull-right"-->
+<!--                        (click)="updateAvatarEyeBrowsNext(this.activeIndexEyebrows)"-->
+<!--                        [disabled]="this.activeIndexEyebrows === avatar.eyebrows.length - 1">Next-->
+<!--                </button>-->
+<!--                <p class="avatar-value">{{this.avatar.avatarConfig.current_eyebrows}}</p>-->
+<!--                <p class="avatar-count">{{this.activeIndexEyebrows + 1}}/{{avatar.eyebrows.length}}</p>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper">-->
+<!--                <p class="avatar-title"><b>Mouth:</b></p>-->
+<!--                <button mat-raised-button class="btn btn-info pull-left"-->
+<!--                        (click)="updateAvatarMouthPrev(this.activeIndexMouth)" [disabled]="this.activeIndexMouth === 0">-->
+<!--                    Prev-->
+<!--                </button>-->
+<!--                <button mat-raised-button class="btn btn-info pull-right"-->
+<!--                        (click)="updateAvatarMouthNext(this.activeIndexMouth)"-->
+<!--                        [disabled]="this.activeIndexMouth === avatar.mouths.length - 1">Next-->
+<!--                </button>-->
+<!--                <p class="avatar-value">{{this.avatar.avatarConfig.current_mouth}}</p>-->
+<!--                <p class="avatar-count">{{this.activeIndexMouth + 1}}/{{avatar.mouths.length}}</p>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper skin-wrapper">-->
+<!--                <p class="avatar-title"><b>Skin Tone:</b></p>-->
+<!--                <div class="avatar-choice-skincolor" *ngFor="let tone of avatar.tones; let index=index"-->
+<!--                     (click)="updateAvatarTone(tone)">-->
+<!--                    <input type="radio" id="{{tone}}" name="skincolor" value="#{{tone}}"-->
+<!--                           [checked]="avatar.avatarConfig.current_tone == tone">-->
+<!--                    <label for="{{tone}}" [ngStyle]="{backgroundColor: '#' + tone}"></label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </mat-expansion-panel>-->
+<!--        <mat-expansion-panel>-->
+<!--            <mat-expansion-panel-header>-->
+<!--                <mat-panel-title>-->
+<!--                    Edit Avatar Extras-->
+<!--                </mat-panel-title>-->
+<!--            </mat-expansion-panel-header>-->
+<!--            <div class="avatar-choice-wrapper">-->
+<!--                <p class="avatar-title"><b>Glasses:</b></p>-->
+<!--                <button mat-raised-button class="btn btn-info pull-left"-->
+<!--                        (click)="updateAvatarGlasses(this.activeIndexGlasses - 1)"-->
+<!--                        [disabled]="this.activeIndexGlasses === 0">Prev-->
+<!--                </button>-->
+<!--                <button mat-raised-button class="btn btn-info pull-right"-->
+<!--                        (click)="updateAvatarGlasses(this.activeIndexGlasses + 1)"-->
+<!--                        [disabled]="this.activeIndexGlasses === avatar.glasses.length - 1">Next-->
+<!--                </button>-->
+<!--                <p class="avatar-value">{{this.avatar.avatarConfig.current_glasses}}</p>-->
+<!--                <p class="avatar-count">{{this.activeIndexGlasses + 1}}/{{avatar.glasses.length}}</p>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper">-->
+<!--                <p class="avatar-title"><b>Glasses Opacity:</b></p>-->
+<!--                <button mat-raised-button class="btn btn-info pull-left"-->
+<!--                        (click)="updateAvatarGlassOpacity(this.activeIndexGlassOpacity - 1)"-->
+<!--                        [disabled]="this.activeIndexGlassOpacity === 0">Prev-->
+<!--                </button>-->
+<!--                <button mat-raised-button class="btn btn-info pull-right"-->
+<!--                        (click)="updateAvatarGlassOpacity(this.activeIndexGlassOpacity + 1)"-->
+<!--                        [disabled]="this.activeIndexGlassOpacity === avatar.glassopacities.length - 1">Next-->
+<!--                </button>-->
+<!--                <p class="avatar-value">{{this.avatar.avatarConfig.current_glassopacity}}</p>-->
+<!--                <p class="avatar-count">{{this.activeIndexGlassOpacity + 1}}/{{avatar.glassopacities.length}}</p>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper">-->
+<!--                <p class="avatar-title"><b>Tattoos:</b></p>-->
+<!--                <button mat-raised-button class="btn btn-info pull-left"-->
+<!--                        (click)="updateAvatarTattoo(this.activeIndexTattoo - 1)"-->
+<!--                        [disabled]="this.activeIndexTattoo === 0">Prev-->
+<!--                </button>-->
+<!--                <button mat-raised-button class="btn btn-info pull-right"-->
+<!--                        (click)="updateAvatarTattoo(this.activeIndexTattoo + 1)"-->
+<!--                        [disabled]="this.activeIndexTattoo === avatar.tattoos.length - 1">Next-->
+<!--                </button>-->
+<!--                <p class="avatar-value">{{this.avatar.avatarConfig.current_tattoo}}</p>-->
+<!--                <p class="avatar-count">{{this.activeIndexTattoo + 1}}/{{avatar.tattoos.length}}</p>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper">-->
+<!--                <p class="avatar-title"><b>Accessory:</b></p>-->
+<!--                <button mat-raised-button class="btn btn-info pull-left"-->
+<!--                        (click)="updateAvatarAccessory(this.activeIndexAccessory - 1)"-->
+<!--                        [disabled]="this.activeIndexAccessory === 0">Prev-->
+<!--                </button>-->
+<!--                <button mat-raised-button class="btn btn-info pull-right"-->
+<!--                        (click)="updateAvatarAccessory(this.activeIndexAccessory + 1)"-->
+<!--                        [disabled]="this.activeIndexAccessory === avatar.accesories.length - 1">Next-->
+<!--                </button>-->
+<!--                <p class="avatar-value">{{this.avatar.avatarConfig.current_accessory}}</p>-->
+<!--                <p class="avatar-count">{{this.activeIndexAccessory + 1}}/{{avatar.accesories.length}}</p>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper">-->
+<!--                <p class="avatar-title"><b>Clothing:</b></p>-->
+<!--                <button mat-raised-button class="btn btn-info pull-left"-->
+<!--                        (click)="updateAvatarClothing(this.activeIndexClothing - 1)"-->
+<!--                        [disabled]="this.activeIndexClothing === 0">Prev-->
+<!--                </button>-->
+<!--                <button mat-raised-button class="btn btn-info pull-right"-->
+<!--                        (click)="updateAvatarClothing(this.activeIndexClothing + 1)"-->
+<!--                        [disabled]="this.activeIndexClothing === avatar.clothes.length - 1">Next-->
+<!--                </button>-->
+<!--                <p class="avatar-value">{{this.avatar.avatarConfig.current_clothes}}</p>-->
+<!--                <p class="avatar-count">{{this.activeIndexClothing + 1}}/{{avatar.clothes.length}}</p>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper skin-wrapper">-->
+<!--                <p class="avatar-title"><b>Clothing Color:</b></p>-->
+<!--                <div class="avatar-choice-clothcolor" *ngFor="let clothcolor of avatar.fabriccolors; let index=index"-->
+<!--                     (click)="updateAvatarClothingColor(clothcolor)">-->
+<!--                    <input type="radio" id="{{clothcolor}}" name="backgroundcolor" value="#{{clothcolor}}"-->
+<!--                           [checked]="avatar.avatarConfig.current_fabriccolors == clothcolor">-->
+<!--                    <label for="{{clothcolor}}" [ngStyle]="{backgroundColor: '#' + clothcolor}"></label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="avatar-choice-wrapper skin-wrapper">-->
+<!--                <p class="avatar-title"><b>Background Color:</b></p>-->
+<!--                <div class="avatar-choice-skincolor" *ngFor="let color of avatar.backgroundcolors; let index=index"-->
+<!--                     (click)="updateAvatarBackground(color)">-->
+<!--                    <input type="radio" id="{{color}}" name="backgroundcolor" value="#{{color}}"-->
+<!--                           [checked]="avatar.avatarConfig.current_backgroundcolor == color">-->
+<!--                    <label for="{{color}}" [ngStyle]="{backgroundColor: '#' + color}"></label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </mat-expansion-panel>-->
+<!--    </mat-accordion>-->
+
+<!--</div>-->
+<!--<button (click)="updateUserAvatar()"-->
+<!--        [disabled]="submitting"-->
+<!--        class="btn btn-info">-->
+<!--    <span [hidden]="submitting">{{'Update Avatar'}}</span>-->
+<!--    <span [hidden]="!submitting"><img width="21" src="/assets/img/ui/loading-spinner.svg" alt="Loading"></span>-->
+<!--</button>-->

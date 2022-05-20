@@ -1,14 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import {AlertController, ModalController, ToastController} from '@ionic/angular';
 import { UserProfile } from 'src/app/models/user';
 import { ProfileService } from './profile.service';
 import { Observable, Subscription } from 'rxjs';
 import {first, map, tap} from 'rxjs/operators';
 import { ProfileStore } from './profile.store';
 import {HttpClient} from '@angular/common/http';
+import {BlockAvatarEditComponent} from "../../components/block-avatar-edit/block-avataredit.component";
+
 
 @Component({
   selector: 'app-profile',
@@ -52,6 +53,7 @@ export class ProfilePage implements OnDestroy, OnInit {
     private profileService: ProfileService,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
     private readonly profileStore: ProfileStore,
     private http : HttpClient
   ) {}
@@ -119,7 +121,7 @@ export class ProfilePage implements OnDestroy, OnInit {
     });
   }
 
-   updateDisplayName(): void {
+  updateDisplayName(): void {
       let currentDisplayName = this.userData.displayName;
       this.userProfileSubscription = this.userProfile$.pipe(first()).subscribe(async userProfile => {
       const alert = await this.alertCtrl.create({
@@ -222,5 +224,17 @@ export class ProfilePage implements OnDestroy, OnInit {
       }
       this.profileStore.updateAchievements(tmpAchievements);
     }
+  }
+
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: BlockAvatarEditComponent,
+
+      backdropDismiss: false,
+      swipeToClose: false,
+      breakpoints: [0, 0.9],
+      initialBreakpoint: 0.9
+    });
+    await modal.present();
   }
 }

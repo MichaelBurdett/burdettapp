@@ -8,6 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 
 import { BlockAvatarComponent} from "./components/block-avatar/block-avatar.component";
+import { BlockAvatarEditComponent} from "./components/block-avatar-edit/block-avataredit.component";
 import { AppRoutingModule } from './app-routing.module';
 
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -19,7 +20,9 @@ import { environment } from '../environments/environment';
 @NgModule({
     declarations: [
         AppComponent,
-        BlockAvatarComponent],
+        BlockAvatarComponent,
+        BlockAvatarEditComponent
+    ],
     entryComponents: [],
     imports: [
         BrowserModule,
@@ -33,7 +36,8 @@ import { environment } from '../environments/environment';
     providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
     bootstrap: [AppComponent],
     exports: [
-        BlockAvatarComponent
+        BlockAvatarComponent,
+        BlockAvatarEditComponent
     ]
 })
 export class AppModule {}
