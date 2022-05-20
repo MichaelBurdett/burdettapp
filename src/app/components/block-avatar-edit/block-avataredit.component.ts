@@ -72,67 +72,65 @@ export class BlockAvatarEditComponent  implements OnInit {
   updateAvatarHairColor(event) {
     this.avatar.avatarConfig.current_haircolor = event;
   }
-
-  // updateAvatarEyeNext(value) {
-  //   const newValue = value + 1
-  //   this.avatar.avatarConfig.current_eyes = this.avatar.eyes[newValue];
-  //   this.activeIndexEyes = newValue
-  // }
-  // updateAvatarEyePrev(value) {
-  //   const newValue = value - 1
-  //   this.avatar.avatarConfig.current_eyes = this.avatar.eyes[newValue];
-  //   this.activeIndexEyes = newValue
-  // }
-  // updateAvatarEyeBrowsNext(value) {
-  //   const newValue = value + 1
-  //   this.avatar.avatarConfig.current_eyebrows = this.avatar.eyebrows[newValue];
-  //   this.activeIndexEyebrows = newValue
-  // }
-  // updateAvatarEyeBrowsPrev(value) {
-  //   const newValue = value - 1
-  //   this.avatar.avatarConfig.current_eyebrows = this.avatar.eyebrows[newValue];
-  //   this.activeIndexEyebrows = newValue
-  // }
-  // updateAvatarMouthNext(value) {
-  //   const newValue = value + 1
-  //   this.avatar.avatarConfig.current_mouth = this.avatar.mouths[newValue];
-  //   this.activeIndexMouth = newValue
-  // }
-  // updateAvatarMouthPrev(value) {
-  //   const newValue = value - 1
-  //   this.avatar.avatarConfig.current_mouth = this.avatar.mouths[newValue];
-  //   this.activeIndexMouth = newValue
-  // }
-  // updateAvatarTone(event) {
-  //   this.avatar.avatarConfig.current_tone = event;
-  // }
-  //
-  // updateAvatarGlasses(value) {
-  //   this.avatar.avatarConfig.current_glasses = this.avatar.glasses[value];
-  //   this.activeIndexGlasses = value
-  // }
-  // updateAvatarGlassOpacity(value) {
-  //   this.avatar.avatarConfig.current_glassopacity = this.avatar.glassopacities[value];
-  //   this.activeIndexGlassOpacity = value
-  // }
-  // updateAvatarTattoo(value) {
-  //   this.avatar.avatarConfig.current_tattoo = this.avatar.tattoos[value];
-  //   this.activeIndexTattoo = value
-  // }
-  // updateAvatarAccessory(value) {
-  //   this.avatar.avatarConfig.current_accessory = this.avatar.accesories[value];
-  //   this.activeIndexAccessory = value
-  // }
-  // updateAvatarClothing(value) {
-  //   this.avatar.avatarConfig.current_clothes = this.avatar.clothes[value];
-  //   this.activeIndexClothing = value
-  // }
-  // updateAvatarClothingColor(event) {
-  //   this.avatar.avatarConfig.current_fabriccolors = event;
-  // }
-  // updateAvatarBackground(event) {
-  //   this.avatar.avatarConfig.current_backgroundcolor = event;
-  // }
+  updateAvatarEyeNext(value) {
+    const newValue = value + 1
+    this.avatar.avatarConfig.current_eyes = this.avatar.eyes[newValue];
+    this.activeIndexEyes = newValue
+  }
+  updateAvatarEyePrev(value) {
+    const newValue = value - 1
+    this.avatar.avatarConfig.current_eyes = this.avatar.eyes[newValue];
+    this.activeIndexEyes = newValue
+  }
+  updateAvatarEyeBrowsNext(value) {
+    const newValue = value + 1
+    this.avatar.avatarConfig.current_eyebrows = this.avatar.eyebrows[newValue];
+    this.activeIndexEyebrows = newValue
+  }
+  updateAvatarEyeBrowsPrev(value) {
+    const newValue = value - 1
+    this.avatar.avatarConfig.current_eyebrows = this.avatar.eyebrows[newValue];
+    this.activeIndexEyebrows = newValue
+  }
+  updateAvatarMouthNext(value) {
+    const newValue = value + 1
+    this.avatar.avatarConfig.current_mouth = this.avatar.mouths[newValue];
+    this.activeIndexMouth = newValue
+  }
+  updateAvatarMouthPrev(value) {
+    const newValue = value - 1
+    this.avatar.avatarConfig.current_mouth = this.avatar.mouths[newValue];
+    this.activeIndexMouth = newValue
+  }
+  updateAvatarTone(event) {
+    this.avatar.avatarConfig.current_tone = event;
+  }
+  updateAvatarGlasses(value) {
+    this.avatar.avatarConfig.current_glasses = this.avatar.glasses[value];
+    this.activeIndexGlasses = value
+  }
+  updateAvatarGlassOpacity(value) {
+    this.avatar.avatarConfig.current_glassopacity = this.avatar.glassopacities[value];
+    this.activeIndexGlassOpacity = value
+  }
+  updateAvatarTattoo(value) {
+    this.avatar.avatarConfig.current_tattoo = this.avatar.tattoos[value];
+    this.activeIndexTattoo = value
+  }
+  updateAvatarAccessory(value) {
+    this.avatar.avatarConfig.current_accessory = this.avatar.accesories[value];
+    this.activeIndexAccessory = value
+  }
+  updateAvatarClothing(value) {
+    this.avatar.avatarConfig.current_clothes = this.avatar.clothes[value];
+    this.activeIndexClothing = value
+  }
+  updateAvatarClothingColor(event) {
+    this.avatar.avatarConfig.current_fabriccolors = event;
+  }
+  updateAvatarBackground(event) {
+    this.avatar.avatarConfig.current_backgroundcolor = event;
+  }
   //
   // updateUserAvatar() {
   //   this.submitting = true;

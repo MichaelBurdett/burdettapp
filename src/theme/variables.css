@@ -79,5 +79,8 @@ ion-tabs .tabbar {
     padding-left: calc((100% - 992px) / 2);
   }
 }
+.avatar-multipicker {
+  justify-content: center !important;
+}
 
 /*# sourceMappingURL=variables.css.map */

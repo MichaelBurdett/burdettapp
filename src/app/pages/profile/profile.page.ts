@@ -229,11 +229,11 @@ export class ProfilePage implements OnDestroy, OnInit {
   async presentModal() {
     const modal = await this.modalCtrl.create({
       component: BlockAvatarEditComponent,
-
       backdropDismiss: false,
+      handle: false,
       swipeToClose: false,
-      breakpoints: [0, 0.9],
-      initialBreakpoint: 0.9
+      breakpoints: [1],
+      initialBreakpoint: 1
     });
     await modal.present();
   }

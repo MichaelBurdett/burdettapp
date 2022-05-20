@@ -4,16 +4,16 @@ $avatar-size-sidebar: 200px;
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-top:20px;
 
   .avatar {
-    height: 200px;
-    width: 200px;
+    margin: 40px auto;
+    height: $avatar-size-sidebar;
+    width: $avatar-size-sidebar;
     z-index: 6;
 
     svg {
-      height: 200px;
-      width: 200px;
+      height: $avatar-size-sidebar;
+      width: $avatar-size-sidebar;
     }
   }
 }
@@ -49,6 +49,7 @@ $avatar-size-sidebar: 200px;
   align-items: center;
   display: flex;
   flex-direction: column-reverse;
+  margin-right: 3px;
   text-align: center;
   width: 14%;
 
@@ -62,6 +63,7 @@ $avatar-size-sidebar: 200px;
   }
 
   input {
+    margin-top: 3px;
     &:hover {
       cursor: pointer;
     }
@@ -72,6 +74,7 @@ $avatar-size-sidebar: 200px;
   align-items: center;
   display: flex;
   flex-direction: column-reverse;
+  margin-right: 3px;
   text-align: center;
   width: 11%;
 
@@ -85,6 +88,7 @@ $avatar-size-sidebar: 200px;
   }
 
   input {
+    margin-top: 3px;
     &:hover {
       cursor: pointer;
     }
@@ -95,7 +99,7 @@ $avatar-size-sidebar: 200px;
   align-items: center;
   display: flex;
   flex-direction: column-reverse;
-  margin-bottom: 10px;
+  margin-right: 3px;
   text-align: center;
   width: 11%;
 
@@ -109,6 +113,7 @@ $avatar-size-sidebar: 200px;
   }
 
   input {
+    margin-top: 3px;
     &:hover {
       cursor: pointer;
     }
@@ -118,7 +123,7 @@ $avatar-size-sidebar: 200px;
 .avatar {
   border-radius: 100%;
   height: $avatar-size-sidebar;
-  margin: 40px auto;
+  margin: 10px auto;
   overflow: hidden;
   position: relative;
   width: $avatar-size-sidebar;
